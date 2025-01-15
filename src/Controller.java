@@ -182,6 +182,9 @@ public class Controller {
 
     //-------------
 
+    /**
+     * Sortiert alle Charaktere nach ihrer Herkunft.
+     */
     void charakterNachHerkunftsortFiltern(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Herkunftsort, nach dem man filtern soll: ");
@@ -193,6 +196,9 @@ public class Controller {
             System.out.println(charakter);
     }
 
+    /**
+     * Zeigt alle Kunden an, die ein Produkt aus einer von der Tastatur eingegebenen Region gekauft haben.
+     */
     void zeigeKundenNachProduktHerkunft(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Herkunftsregion, nach der man filtern soll: ");
@@ -205,6 +211,9 @@ public class Controller {
     }
 
 
+    /**
+     * Sortiert fur einen Charakter dessen Produkte nach Preis.
+     */
     void produkteEinesCharaktersNachPreisSortieren(){
         Scanner sc = new Scanner(System.in);
         System.out.println("ID des Kunden: ");
