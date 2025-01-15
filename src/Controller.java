@@ -219,7 +219,22 @@ public class Controller {
                 break;
             }
 
+        produktListe.sort(Produkt::compareTo);
 
+        System.out.println("Sortiermodus: Steigend/Fallend (s/f)");
+        String sortiermodus = sc.nextLine();
+
+        if (sortiermodus.equals("s") || sortiermodus.equals("Steigend") || sortiermodus.equals("steigend"))
+        {
+            for (Produkt produkt: produktListe)
+                System.out.println(produkt);
+        }
+        else
+        {
+            produktListe = produktListe.reversed();
+            for (Produkt produkt: produktListe)
+                System.out.println(produkt);
+        }
     }
 
 }

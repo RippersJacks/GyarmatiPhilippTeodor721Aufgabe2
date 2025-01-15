@@ -17,7 +17,8 @@ public class Console {
                     1. Produkt CRUD
                     2. Charakter CRUD
                     3. Charakter nach Herkunftsort filtern
-                    4. Alle Charaktere zeigen, die Produkte aus einer gegebenen Herkunftsregion gekauft haben""");
+                    4. Alle Charaktere zeigen, die Produkte aus einer gegebenen Herkunftsregion gekauft haben
+                    5. Produkte eines Kunden nach Preis sortieren""");
 
             option = sc.nextInt();
             sc.nextLine();
@@ -101,6 +102,10 @@ public class Console {
                 }
                 case 4:{
                     controller.zeigeKundenNachProduktHerkunft();
+                    break;
+                }
+                case 5:{
+                    controller.produkteEinesCharaktersNachPreisSortieren();
                     break;
                 }
             }
