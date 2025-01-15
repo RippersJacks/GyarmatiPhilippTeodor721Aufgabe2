@@ -16,7 +16,8 @@ public class Console {
             System.out.println("""
                     1. Produkt CRUD
                     2. Charakter CRUD
-                    3.""");
+                    3. Charakter nach Herkunftsort filtern
+                    4. Alle Charaktere zeigen, die Produkte aus einer gegebenen Herkunftsregion gekauft haben""");
 
             option = sc.nextInt();
             sc.nextLine();
@@ -95,7 +96,11 @@ public class Console {
                 }
 
                 case 3:{
-
+                    controller.charakterNachHerkunftsortFiltern();
+                    break;
+                }
+                case 4:{
+                    controller.zeigeKundenNachProduktHerkunft();
                     break;
                 }
             }
@@ -142,7 +147,7 @@ public class Console {
 
         List<Produkt> produktList1 = new ArrayList<>();
         produktList1.add(produkt1); produktList1.add(produkt5);
-        Charakter charakter1 = new Charakter(1,"Gandalf","Moira",produktList1);
+        Charakter charakter1 = new Charakter(1,"Gandalf","Moria",produktList1);
 
         List<Produkt> produktList2 = new ArrayList<>();
         produktList2.add(produkt1);
@@ -150,7 +155,7 @@ public class Console {
 
         List<Produkt> produktList3 = new ArrayList<>();
         produktList3.add(produkt3); produktList3.add(produkt4); produktList3.add(produkt6);
-        Charakter charakter3 = new Charakter(3,"Smeagal","Saurons Schloss",produktList3);
+        Charakter charakter3 = new Charakter(3,"Smeagal","Moria",produktList3);
 
         List<Produkt> produktList4 = new ArrayList<>();
         produktList4.add(produkt4); produktList4.add(produkt5);

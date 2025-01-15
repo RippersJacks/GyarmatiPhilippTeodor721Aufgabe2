@@ -1,6 +1,8 @@
 import model.Charakter;
 import model.Produkt;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
@@ -180,5 +182,44 @@ public class Controller {
 
     //-------------
 
+    void charakterNachHerkunftsortFiltern(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Herkunftsort, nach dem man filtern soll: ");
+        String herkunftsort = sc.nextLine();
+
+        List<Charakter> charaktere = charakterRepository.getAllElements().stream().filter(c -> c.getHerkunftsOrt().equals(herkunftsort)).toList();
+
+        for (Charakter charakter: charaktere)
+            System.out.println(charakter);
+    }
+
+    void zeigeKundenNachProduktHerkunft(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Herkunftsregion, nach der man filtern soll: ");
+        String herkunftsregion = sc.nextLine();
+
+        for (Charakter charakter: charakterRepository.getAllElements())
+            for (Produkt produkt: charakter.getErworbeneProduktListe())
+                if (produkt.getHerkunftsRegion().equals(herkunftsregion))
+                    System.out.println(charakter);
+    }
+
+
+    void produkteEinesCharaktersNachPreisSortieren(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("ID des Kunden: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        List<Produkt> produktListe = new ArrayList<>();
+        for (Charakter charakter: charakterRepository.getAllElements())
+            if (charakter.getId() == id)
+            {
+                produktListe = charakter.getErworbeneProduktListe();
+                break;
+            }
+
+
+    }
 
 }

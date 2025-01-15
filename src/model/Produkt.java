@@ -1,6 +1,6 @@
 package model;
 
-public class Produkt {
+public class Produkt implements Comparable<Produkt>{
     int id;
     String name;
     int preis;
@@ -55,5 +55,10 @@ public class Produkt {
                 ", preis=" + preis +
                 ", herkunftsRegion='" + herkunftsRegion + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Produkt o) {
+        return this.getPreis() - o.getPreis();
     }
 }
