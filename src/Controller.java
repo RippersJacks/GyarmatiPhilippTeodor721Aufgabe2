@@ -1,3 +1,4 @@
+import model.Charakter;
 import model.Produkt;
 
 import java.util.Scanner;
@@ -5,11 +6,11 @@ import java.util.Scanner;
 public class Controller {
 
     Repository<Produkt> produktRepository;
-    Repository<String> repository2;
+    Repository<Charakter> charakterRepository;
 
-    public Controller(Repository<Produkt> repository1, Repository<String> repository2) {
+    public Controller(Repository<Produkt> repository1, Repository<Charakter> repository2) {
         this.produktRepository = repository1;
-        this.repository2 = repository2;
+        this.charakterRepository = repository2;
     }
 
 
@@ -96,24 +97,85 @@ public class Controller {
 
     //------------
 
-    void create2(){
+    void createCharakter(){
+        int id = -1;
+        for (Charakter charakter: charakterRepository.getAllElements())
+            if (charakter.getId() > id)
+                id = charakter.getId();
+        id++;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Name des Charakters: ");
+        String name = sc.nextLine();
+        System.out.println("Herkunftsort des Charakters: ");
+        String herkunftsort = sc.nextLine();
+
+        charakterRepository.addElement(new Charakter(id, name, herkunftsort));
+    }
+
+    void getCharakter(){
+        System.out.println("ID des Charakters: ");
+        Scanner sc = new Scanner(System.in);
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        for (Charakter charakter: charakterRepository.getAllElements())
+            if (charakter.getId() == id)
+            {
+                System.out.println(charakter);
+                break;
+            }
+    }
+
+    void getAllCharakters(){
+        for (Charakter charakter: charakterRepository.getAllElements())
+            System.out.println(charakter);
+    }
+
+    void updateCharakter(){
+        System.out.println("ID des Charakters: ");
+        Scanner sc = new Scanner(System.in);
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Neuer Name des Charakters: ");
+        String name = sc.nextLine();
+        System.out.println("Neue Herkunft des Charakters: ");
+        String herkunftsort = sc.nextLine();
+
+
+        int index = -1;
+        for (Charakter charakter: charakterRepository.getAllElements())
+            if (charakter.getId() == id)
+            {
+
+                index = charakterRepository.getAllElements().indexOf(charakter);
+                charakter.setName(name);
+                charakter.setHerkunftsOrt(herkunftsort);
+
+                charakterRepository.updateElement(index,charakter);
+                break;
+            }
+
 
     }
 
-    void get2(){
+    void deleteCharakter(){
+        System.out.println("ID des zu loschenden Charakters: ");
+        Scanner sc = new Scanner(System.in);
+        int id = sc.nextInt();
+        sc.nextLine();
 
-    }
+        Charakter charakterAux = new Charakter();
 
-    void getAll2(){
+        for (Charakter charakter: charakterRepository.getAllElements())
+            if (charakter.getId() == id)
+            {
+                charakterAux = charakter;
+                break;
+            }
 
-    }
-
-    void update2(){
-
-    }
-
-    void delete2(){
-
+        charakterRepository.remove(charakterAux);
     }
 
     //-------------

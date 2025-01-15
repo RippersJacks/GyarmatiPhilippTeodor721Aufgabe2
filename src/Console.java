@@ -1,5 +1,8 @@
+import model.Charakter;
 import model.Produkt;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Console {
@@ -12,7 +15,7 @@ public class Console {
         {
             System.out.println("""
                     1. Produkt CRUD
-                    2.
+                    2. Charakter CRUD
                     3.""");
 
             option = sc.nextInt();
@@ -56,34 +59,34 @@ public class Console {
                 }
                 case 2:{
                     System.out.println("""
-                            1. Erstelle
-                            2. Finde einen
-                            3. Zeige alle an
-                            4. Aktualisiere einen
-                            5. Losche einen""");
+                            1. Erstelle einen neuen Charakter
+                            2. Finde einen Charakter
+                            3. Zeige alle Charaktere an
+                            4. Aktualisiere einen Charakter
+                            5. Losche einen Charakter""");
 
                     int option2 = sc.nextInt();
                     sc.nextLine();
 
                     switch (option2){
                         case 1:{
-
+                            controller.createCharakter();
                             break;
                         }
                         case 2:{
-
+                            controller.getCharakter();
                             break;
                         }
                         case 3:{
-
+                            controller.getAllCharakters();
                             break;
                         }
                         case 4:{
-
+                            controller.updateCharakter();
                             break;
                         }
                         case 5:{
-
+                            controller.deleteCharakter();
                             break;
                         }
                     }
@@ -109,19 +112,19 @@ public class Console {
 
     public static void main(String[] args) {
         Repository<Produkt> produktRepository = new Repository<>();
-        Repository<String> repository2 = new Repository<>();
+        Repository<Charakter> charakterRepository = new Repository<>();
 
         Console console = new Console();
-        console.initialiseData(produktRepository, repository2);
+        console.initialiseData(produktRepository, charakterRepository);
 
-        Controller controller = new Controller(produktRepository, repository2);
+        Controller controller = new Controller(produktRepository, charakterRepository);
 
         console = new Console(controller);
         console.run();
     }
 
 
-    public void initialiseData(Repository<Produkt> produktRepository, Repository<String> repository2) {
+    public void initialiseData(Repository<Produkt> produktRepository, Repository<Charakter> charakterRepository) {
         Produkt produkt1 = new Produkt(1,"Schwert",300,"Moria");
         Produkt produkt2 = new Produkt(2,"Schild",100,"Moria");
         Produkt produkt3 = new Produkt(3,"Orangensaft",20,"Zwergenland");
@@ -135,5 +138,27 @@ public class Console {
         produktRepository.addElement(produkt4);
         produktRepository.addElement(produkt5);
         produktRepository.addElement(produkt6);
+
+
+        List<Produkt> produktList1 = new ArrayList<>();
+        produktList1.add(produkt1); produktList1.add(produkt5);
+        Charakter charakter1 = new Charakter(1,"Gandalf","Moira",produktList1);
+
+        List<Produkt> produktList2 = new ArrayList<>();
+        produktList2.add(produkt1);
+        Charakter charakter2 = new Charakter(2,"Zwergie","Zwergenland",produktList2);
+
+        List<Produkt> produktList3 = new ArrayList<>();
+        produktList3.add(produkt3); produktList3.add(produkt4); produktList3.add(produkt6);
+        Charakter charakter3 = new Charakter(3,"Smeagal","Saurons Schloss",produktList3);
+
+        List<Produkt> produktList4 = new ArrayList<>();
+        produktList4.add(produkt4); produktList4.add(produkt5);
+        Charakter charakter4 = new Charakter(4,"Messi","Hobbitfelder",produktList4);
+
+        charakterRepository.addElement(charakter1);
+        charakterRepository.addElement(charakter2);
+        charakterRepository.addElement(charakter3);
+        charakterRepository.addElement(charakter4);
     }
 }
